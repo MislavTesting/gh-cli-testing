@@ -1,0 +1,15 @@
+name: CI
+on: push
+jobs:
+  gh-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      # repository-projects: read # fails without this
+    steps:
+      - name: token test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: api
+        run: gh issue view https://github.com/$GITHUB_REPOSITORY/issues/13
